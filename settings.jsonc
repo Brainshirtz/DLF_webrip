@@ -1,0 +1,15 @@
+{
+    // ...existing settings...
+    "editor.scrollbar.vertical": "visible",
+    "editor.scrollbar.horizontal": "visible",
+    "editor.scrollbar.verticalScrollbarSize": 14,
+    "editor.scrollbar.horizontalScrollbarSize": 14,
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/c:/Users/paulu/Documents/DLF_Website/Webrip",
+    "liveServer.settings.ignoreFiles": [
+        ".vscode/**",
+        "**/*.scss",
+        "**/*.sass"
+    ],
+    // ...existing settings...
+}

@@ -1,0 +1,50 @@
+$(document).ready(function() {
+	$(".findlink").click(function() {
+		location.href = $(this).find("a").attr("href");
+	});
+	
+	$("section#contactform #cForm").submit(function(e) {
+		e.preventDefault();
+		$.post("/ajax/sendform.asp", $("#cForm").serialize(), function(data) {
+			if (data=="SUCCESS") {
+				$("#cForm").toggle();
+				$("#msgSUCCESS").removeClass("hidden");
+			} else {
+				$("#msgERROR").removeClass("hidden");
+			}
+		});
+	});
+	
+	$(".btnAdd2Cart").click(function(e) {
+		e.preventDefault();
+		$.post("/ajax/add2cart.asp?index=" + $(this).attr("rel") + "&no=" + $(".input-sm[rel='" + $(this).attr("rel") + "']").val(), function(data) {
+			if(data=="SUCCESS") { $("#myModal").modal("show"); }
+		});
+	});
+	$(".btnDelFromCart").click(function(e) {
+		e.preventDefault();
+		var antwoord = confirm("Weet u zeker dat u dit artikel uit de winkelwagen wilt verwijderen?");
+		if (antwoord==true) {
+			$.post("/ajax/delfromcart.asp?index=" + $(this).attr("rel"), function(data) {
+				if(data=="SUCCESS") { location.reload(); }
+			});
+		}
+	});
+	
+	$("#btnCart").click(function(e) {
+		e.preventDefault();
+		location.href="/winkelwagen/";
+	});
+	
+	$("#eForm").submit(function(e) {
+		e.preventDefault();
+		$.post("/ajax/processorder.asp", $("#eForm").serialize(), function(data) {
+			if(data=="SUCCESS") {
+				$("#eForm").addClass("hidden");
+				$("#msgSuccess").removeClass("hidden");
+			} else {
+				alert("Er is iets mis gegaan; probeer het nogmaals!");
+			}
+		});
+	});
+});
